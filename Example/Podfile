@@ -6,6 +6,4 @@ end
 
 target 'Tests', :exclusive => true do
   pod "SAAuth", :path => "../"
-
-  pod 'FBSnapshotTestCase'
 end

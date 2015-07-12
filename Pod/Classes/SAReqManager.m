@@ -11,6 +11,8 @@
 #import "SAAuthWeChatProcess.h"
 #import "WXApi.h"
 #import "SAAuthQQProcess.h"
+#import "SAAuthWeChatProcess.h"
+#import <WeiboSDK.h>
 
 @interface SAReqManager () <WXApiDelegate, SAReqAuthDelegate>
 @property (nonatomic, strong) SAReqAuthProcess* authProcess;
@@ -29,6 +31,13 @@
 
 - (void) requestAuth:(SAReqAuthProcess*)process
 {
+    NSError* error;
+    if (![process canRequest:&error]) {
+        if (_completionBlock) {
+            _completionBlock(nil, error);
+        }
+        return ;
+    }
     self.authProcess = process;
     self.authProcess.delegate = self;
     [process request];
@@ -52,6 +61,14 @@
     _tencentAPPID = appID;
 }
 
+- (void) registerWeiboAppID:(NSString *)appid secret:(NSString *)secret
+{
+    _weiboAppID = appid;
+    _weiboAppSecret = secret;
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:appid];
+}
+
 - (void) registerWeChatApp:(NSString *)appID scret:(NSString *)scret
 {
     _wechatAppId = appID;
@@ -71,7 +88,6 @@
 {
     self.authProcess = nil;
     [self sendCompletion:token error:nil];
-    
 }
 
 - (void) authProcess:(SAReqAuthProcess *)process failtWithError:(NSError *)error
@@ -81,7 +97,19 @@
 }
 - (void) requestWeiXinAuth:(RequestAuthCompletion)block
 {
-    [self requestAuth:[SAAuthWeChatProcess new]];
     _completionBlock = block;
+    [self requestAuth:[SAAuthWeChatProcess new]];
+}
+
+- (void) requestQQAuth:(RequestAuthCompletion)block
+{
+    _completionBlock = block;
+    [self requestAuth:[SAAuthQQProcess new]];
+}
+
+- (void) requestWeiboAuth:(RequestAuthCompletion)block
+{
+    _completionBlock = block;
+    [self requestAuth:[SAAuthWeChatProcess new]];
 }
 @end

@@ -10,6 +10,7 @@
 #import "TencentOAuth.h"
 #import "QQApi.h"
 #import "SAReqManager.h"
+#import "SAToken.h"
 @interface SAAuthQQProcess () <TencentSessionDelegate>
 {
     TencentOAuth* _tencentOAuth;
@@ -24,6 +25,16 @@
     }
     _tencentOAuth = [[TencentOAuth alloc] initWithAppId:SAAuthShareManager.tencentAPPID andDelegate:self];
     return self;
+}
+- (BOOL) canRequest:(NSError *__autoreleasing *)error
+{
+    if (![TencentOAuth iphoneQQInstalled]) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:@"com.tencent.error" code:-92 userInfo:@{NSLocalizedDescriptionKey:@"请安装QQ"}];
+        }
+        return NO;
+    }
+    return YES;
 }
 - (BOOL) handleOpenURL:(NSURL *)url
 {
@@ -67,7 +78,6 @@
     token.userInfos = response.jsonResponse;
     token.userAvaterURL = token.userInfos[@"figureurl_qq_2"];
     token.nickName = token.userInfos[@"nickname"];
-//    token.type = SATokenQQ;
     if ([self.delegate respondsToSelector:@selector(authProcess:succeedWithToken:)]) {
         [self.delegate authProcess:self succeedWithToken:token];
     }

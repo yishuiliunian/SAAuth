@@ -7,13 +7,23 @@
 //
 
 #import "SAViewController.h"
-
+#import <SAAuth/SAReqManager.h>
 @interface SAViewController ()
 
 @end
 
 @implementation SAViewController
 
+- (IBAction)requestAuth:(id)sender
+{
+    [[SAReqManager shareManager] requestWeiboAuth:^(SAToken *token, NSError *error) {
+        
+        if (error) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

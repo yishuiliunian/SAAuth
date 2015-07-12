@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SAAuth"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "SAAuth帮你快速的获取QQ、微信等的第三方登陆权限"
   s.description      = <<-DESC
                        SAAuth设计用来获取第三方登陆权限。把几个常见的社交平台的IOS权限获取封装起来，省去开发者每次都再次开发的痛苦。目前支持QQ和微信，后续后加入其他平台。
@@ -30,8 +30,9 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit', 'ImageIO', 'QuartzCore', 'CoreTelephony' , 'CoreText', 'CoreGraphics'
   s.dependency 'DZQQLib'
   s.dependency 'DZWeChatLib'
   s.dependency 'JSONModel'
+  s.dependency "DZWeiboSDK"
 end

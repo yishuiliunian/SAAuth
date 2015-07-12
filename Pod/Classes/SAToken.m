@@ -8,6 +8,10 @@
 
 #import "SAToken.h"
 
+int SATokenTypeTOInt(SATokenType type) {
+    return type;
+}
+
 @implementation SAToken
 
 @end

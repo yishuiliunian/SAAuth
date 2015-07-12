@@ -14,6 +14,9 @@ typedef enum {
     SATokenWechat,
     SATokenQQ
 }SATokenType;
+
+FOUNDATION_EXTERN int SATokenTypeTOInt(SATokenType type);
+
 @protocol SAToken <NSObject>
 
 @end

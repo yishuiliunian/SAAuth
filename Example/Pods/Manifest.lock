@@ -1,26 +1,26 @@
 PODS:
   - DZQQLib (2.8.1)
   - DZWeChatLib (1.5.0)
-  - FBSnapshotTestCase (1.6)
-  - JSONModel (1.0.2)
-  - SAAuth (0.1.0):
+  - DZWeiboSDK (3.1.1)
+  - JSONModel (1.1.0)
+  - SAAuth (0.1.1):
     - DZQQLib
     - DZWeChatLib
+    - DZWeiboSDK
     - JSONModel
 
 DEPENDENCIES:
-  - FBSnapshotTestCase
   - SAAuth (from `../`)
 
 EXTERNAL SOURCES:
   SAAuth:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   DZQQLib: 3419d72f780ee1a116d26ae57ca4639185a0f4e1
   DZWeChatLib: 9bcf116f483a7d50ae24c7016f187676fab0e2c2
-  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
-  JSONModel: cbdef0fdff1cc70e913a860861d3072860efd3a1
-  SAAuth: ecf7b74c84254c592acc9f38bec52514ea17f557
+  DZWeiboSDK: 9ac44ad04b5017e0354be11d64dec889c297b27f
+  JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
+  SAAuth: f5395d86651f84038fdbf91d25fb887dca9ad2a7
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.37.2

@@ -7,12 +7,14 @@
 //
 
 #import "SAAppDelegate.h"
-
+#import <SAAuth/SAReqManager.h>
 @implementation SAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [SAAuthShareManager registerTencentApp:@"1104574933"];
+    [SAAuthShareManager registerWeiboAppID:@"1794232399" secret:@"1792eb3262b7d9405471e22662469b5a"];
     return YES;
 }
 							
@@ -41,6 +43,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [SAAuthShareManager handleURL:url];
 }
 
 @end
